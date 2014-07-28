@@ -6,7 +6,56 @@
 
 % !Rnw weave = knitr
 
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \usepackage{fullpage}
 \usepackage[authoryear]{natbib}
 \usepackage{setspace}
@@ -30,32 +79,13 @@
 \usepackage[utf8]{inputenc} 
 
 % Set knitr global options and load packages
-<<ParentGlobalOpts, include=FALSE>>=
-    # Global knitr options
-    opts_chunk$set(concordance=TRUE)
-    opts_chunk$set(fig.align='center')
 
-    # Load packages
-    Pkgs <- c("repmis", "digest", "devtools", "plyr", "ecp", "gridExtra",
-                "ggplot2", "reshape2")
-    repmis::LoadandCite(Pkgs, file = "PaperPackages.bib")
-    # repmis::LoadandCite(Pkgs) # Used for testing.
-
-    # Load e.divGG function
-    source('source/e.divGG.R')
-
-    # Load data
-    SenateMonth <- read.csv("data/SenateFullHearings.csv",
-                            stringsAsFactors = FALSE)
-    HouseMonth <- read.csv("data/HouseFullHearings.csv", 
-                           stringsAsFactors = FALSE)
-@
 
 %%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Creating Scrutiny Indicators: A Change Point Exploration of Congressional Scrutiny of the US Federal Reserve}
 
-\author{Christopher Gandrud \\ {\emph{Hertie School of Governance}} \\ \& \\ Kevin Young \\ {\emph{University of Massachusetts, Amherst}}} 
-
+\author{Christopher Gandrud \\ {\emph{Hertie School of Governance}} \\ \& \\ Kevin Young \\ {\emph{University of Massachusetts, Amherst}}}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 \maketitle
@@ -63,7 +93,7 @@
 %%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-\noindent\emph{Draft. Comments welcome.}\footnote{Corresponding author: Christopher Gandrud, post-doctoral fellow at the Hertie School of Governance (\href{mailto:gandrud@hertie-school.org}{gandrud@hertie-school.org}). \\ Thank to you Rebecca Kanter, Natalie McClung, and Brent Ramsey for research assistance. \\
+\noindent\emph{Draft. Comments welcome.}\footnote{Corresponding author: Christopher Gandrud (\href{mailto:gandrud@hertie-school.org}{gandrud@hertie-school.org}). \\ Thank to you Rebecca Kanter, Natalie McClung, and Brent Ramsey for research assistance. \\
 All data and source code needed to reproduce this paper are available at: \url{https://github.com/christophergandrud/FedChangePointNote}.}
 
 In this short research note we investigate trends in congressional scrutiny of the US Federal Reserve from the late 1990s through 2012. Though independent, the Federal Reserve is accountable to legislative principles. The purpose of this note is to develop indicators of high and low scrutiny that can be used in future research to examine how the Fed responds to pressures from legislators. We use change point analysis to estimate periods of high and low legislative scrutiny for both the US House of Representatives and Senate. Surprisingly, though the Senate has the power to approve Fed appointments, their scrutiny of the Fed does not seen to noticeably change over our observation period. The House Committee on Financial Services did noticeably increase its scrutiny of the Fed, and other economic policy bureaucrats during the recent financial crisis. 
@@ -135,14 +165,12 @@ We aggregate our indicators by month (as most days there are no hearings). Heari
 \begin{figure}
     \caption{Congressional Scrutiny of the Federal Reserve Change Point Analysis: Full US House Committee on Financial Services \emph{with} Federal Reserve Testimony}
     \label{fig:HouseFedCP}
-<<ScrutinyHouseFedCP, echo=FALSE, message=FALSE, warning=FALSE, out.width='0.95\\linewidth', cache=TRUE>>=
-# Scrutiny Change Point
-ScrutVarsHouse <- c("SumFedHouse", "FedAttend", "FedLetter", "FedLaughterHouse")
-FedTitles <- c("Hearing Frequency", "Attendance", 
-                  "Letter Corrrespondence", "Laughter")
-e.divGG(data = HouseMonth, Vars = ScrutVarsHouse, TimeVar = "MonthYear", 
-        sig.lvl = 0.05, R = 999, min.size = 24, Titles = FedTitles)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: unused arguments (eps = eps, half = half)}}\end{kframe}
+\end{knitrout}
 {\scriptsize{The red horizontal dashed line signifies the estimated change points at the 95\% significance level from an analysis including both of the variables.\\
 Minimum state width set at 24 months. \\
 The data is aggregated on a monthly basis, i.e. observations represent monthly hearing counts or averages.}}
@@ -152,14 +180,12 @@ The data is aggregated on a monthly basis, i.e. observations represent monthly h
 \begin{figure}
     \caption{Congressional Scrutiny Change Point Analysis: Full US House Committee on Financial Services \emph{without} Federal Reserve Testimony}
     \label{fig:BaseNonFedCP}
-<<ScrutinyNonFedCP, echo=FALSE, message=FALSE, warning=FALSE, out.width='0.8\\linewidth', cache=TRUE>>=
-# Scrutiny Change Point
-NonFedVars <- c("SumNonFed", "NonFedAttend", "NonFedLaughter")
-NonFedTitles <- c("Hearing Frequency", "Attendance", "Laughter")
-e.divGG(data = HouseMonth, Vars = NonFedVars,
-        TimeVar = "MonthYear", Titles = NonFedTitles,
-        sig.lvl = 0.05, R = 999, min.size = 24)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: unused arguments (eps = eps, half = half)}}\end{kframe}
+\end{knitrout}
 {\scriptsize{The red horizontal dashed line signifies the estimated change points at the 95\% significance level.\\
 Minimum state width set at 24 months. \\
 The data is aggregated on a monthly basis, i.e. observations represent monthly hearing counts or averages.}}
@@ -174,29 +200,16 @@ We conducted three separate multivariate change point analyses to try to estimat
 \begin{figure}
     \caption{Congressional Scrutiny Change Point Analysis: Full US Senate Committee on Banking, Housing, and Urban Affairs \emph{with} Federal Reserve Testimony}
     \label{fig:SenateFedCP}
-<<ScrutinySenate, echo=FALSE, message=FALSE, warning=FALSE, out.width='0.8\\linewidth', cache=TRUE>>=
-# Create line graph of counts and means.
-SenateTitles <- c("Hearing Frequency", "Laughter")
-SubMonth <- SenateMonth[, c("MonthYear", "SumFedSenate", "FedLaughterSenate")]
-SubMolten <- melt(data = SubMonth, id.vars = "MonthYear", 
-                    meansure.vars = c("SumFedSenate", "FedLaughterSenate"))
-SubMolten$MonthYear <- as.POSIXct(SubMolten$MonthYear)
-eachVar <- unique(SubMolten$variable)
-VarLabels <- data.frame(eachVar, SenateTitles, stringsAsFactors = FALSE)
-Rows <- 1:nrow(VarLabels)
-p <- list()
-      for (i in Rows){
-        SubData <- subset(SubMolten, variable == VarLabels[i, 1])
-        Title_i <- VarLabels[i, 2]
-        p[[i]] <-   ggplot(data = SubData, 
-                           aes(x = MonthYear, y = value)) +
-                          geom_line() +
-                          xlab("") + ylab("") + ggtitle(paste(Title_i, "\n")) +
-                          theme_bw()
-      }
-      suppressWarnings(do.call(grid.arrange, p))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-@   
+{\centering \includegraphics[width=0.8\linewidth]{figure/ScrutinySenate} 
+
+}
+
+
+
+\end{knitrout}
 {\scriptsize{Note: no change points were estimated at conventional levels of statistical significance and using a wide range of minimum state widths.}}
 \end{figure}
 
@@ -241,13 +254,12 @@ How big of a change does there need to be to inflation and other economic condit
 \begin{figure}
     \caption{Economic Indicator Change Point Analysis}
     \label{fig:FullEconCP}
-<<EconFullCP, echo=FALSE, out.width='0.8\\linewidth', message=FALSE, warning=FALSE, cache=TRUE>>=
-# Economic variables change point
-EconVars <- c("PCEPIPercent", "U6RATE", "GDPC96Percent")
-EconTitles <- c("Inflation", "Unemployment", "Growth")
-e.divGG(data = HouseMonth, Vars = EconVars, TimeVar = "MonthYear", 
-        Titles = EconTitles, sig.lvl = 0.05, R = 999, min.size = 24)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: unused arguments (eps = eps, half = half)}}\end{kframe}
+\end{knitrout}
 {\scriptsize{Red horizontal dashed lines signify the estimated change point at the 95\% significance level from an analysis including all of the variables.\\
 Minimum state width set at 24 months. \\
 Inflation is the percentage change in the chain-type personal consumption price index compared to the year before. Growth indicates GDP growth from the same quarter the year before. Unemployment is the unemployment rate for the month.}}
