@@ -4,5 +4,7 @@ Scrutiny of the US Federal Reserve
 
 28 July 2014
 
-> Research note describing change point analysis of Congressional scrutiny of
-the United States Federal Reserve
+Christopher Gandrud and Kevin Young
+
+> A research note describing change point analysis of Congressional scrutiny of
+the United States Federal Reserve.
