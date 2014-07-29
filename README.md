@@ -1,4 +1,5 @@
-Federal Reserve/Congressional Scrutiny Change Point Research Note
+Creating Scrutiny Indicators: A Change Point Exploration of Congressional
+Scrutiny of the US Federal Reserve
 ==================
 
 28 July 2014
