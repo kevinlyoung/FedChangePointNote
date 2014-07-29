@@ -154,7 +154,7 @@ The data is aggregated on a monthly basis, i.e. observations represent monthly h
     \caption{Congressional Scrutiny Change Point Analysis: Full US House Committee on Financial Services \emph{without} Federal Reserve Testimony}
     \label{fig:BaseNonFedCP}
 <<ScrutinyNonFedCP, echo=FALSE, message=FALSE, warning=FALSE, out.width='0.8\\linewidth', cache=TRUE>>=
-# Scrutiny Change Point
+# Scrutiny Non-Fed Hearings Change Point
 NonFedVars <- c("SumNonFed", "NonFedAttend", "NonFedLaughter")
 NonFedTitles <- c("Hearing Frequency", "Attendance", "Laughter")
 e.divGG(data = HouseMonth, Vars = NonFedVars,

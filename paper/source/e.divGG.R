@@ -7,10 +7,6 @@
 #' @param TimeVar A character string naming the time variable in \code{data}.
 #' @param sig.lvl The level at which to sequentially test if a proposed change
 #' point is statistically significant.
-#' @param eps The uniform error bound used in the implementation of the
-#' permutaiton test as outlined in Gandy (2009).
-#' @param half A constant used to control the epsilon spending rate. Futher
-#' details can be found in Gandy (2009).
 #' @param R The maximum number of random permutations to use in each iteration
 #' of the permutaiton test. The permutation test p-value is calculated usign the
 #' method outlined in Gandy (2009).
@@ -49,10 +45,10 @@
 #' Association.
 #'
 
-e.divGG <- function(data, Vars, TimeVar, sig.lvl = 0.05, R = 199, eps = 1e-3,
-                    half = 1000, k = NULL, min.size = 30, alpha = 1,
-                    PlotVars = NULL, Grid = TRUE, palette = "Set1",
-                    leg.name = "", Titles = NULL, JustGraph = FALSE)
+e.divGG <- function(data, Vars, TimeVar, sig.lvl = 0.05, R = 199, k = NULL,
+                    min.size = 30, alpha = 1, PlotVars = NULL, Grid = TRUE,
+                    palette = "Set1", leg.name = "", Titles = NULL,
+                    JustGraph = FALSE)
 {
     # Load required packages
     require(ecp)
@@ -100,17 +96,18 @@ e.divGG <- function(data, Vars, TimeVar, sig.lvl = 0.05, R = 199, eps = 1e-3,
 
     else if (!isTRUE(JustGraph)){
     # Estimate change points
-    CP <- e.divisive(X = DataMatrix, sig.lvl = sig.lvl, R = R, eps = eps,
-                    half = half, k = k, min.size = min.size, alpha = alpha)
+    CP <- e.divisive(X = DataMatrix, sig.lvl = sig.lvl, R = R, k = k,
+                    min.size = min.size, alpha = alpha)
 
     # Extract change points
     CPEstimates <- CP$estimates
     # Remove first and last points (these are the first and last values of the matrix)
     CPEstSub <- CPEstimates[c(-1, -length(CPEstimates))]
     if (length(CPEstSub) == 0){
-      NoCPGraph()
-      stop(paste("No change points found at the", sig.lvl,
-            "significance level."), .call = FALSE)
+        NoCPGraph()
+        message(paste("\nNo change points found at the", sig.lvl,
+                "significance level.\n"))
+        stop(, call. = FALSE)
     }
 
     #Find corresponding TimeVar value
