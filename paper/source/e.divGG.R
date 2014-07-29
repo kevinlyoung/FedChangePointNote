@@ -99,7 +99,8 @@ e.divGG <- function(data, Vars, TimeVar, sig.lvl = 0.05, R = 199, k = NULL,
 
         # Extract change points
         CPEstimates <- CP$estimates
-        # Remove first and last points (these are the first and last values of the matrix)
+        # Remove first/last points
+        # (these are the first and last values of the matrix)
         CPEstSub <- CPEstimates[c(-1, -length(CPEstimates))]
         if (length(CPEstSub) == 0){
             NoCPGraph()
