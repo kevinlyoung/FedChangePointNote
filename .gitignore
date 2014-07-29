@@ -13,7 +13,7 @@
 # knitr stuff
 *cache
 *concordance.tex
-figure/*
+*figure/*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
