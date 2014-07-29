@@ -5,6 +5,8 @@ Christopher Gandrud and Kevin Young
 
 29 July 2014
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.11079.png)](http://dx.doi.org/10.5281/zenodo.11079)
+
 > A research note describing change point analysis of Congressional scrutiny of
 the United States Federal Reserve.
 
