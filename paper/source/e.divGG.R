@@ -107,75 +107,76 @@ e.divGG <- function(data, Vars, TimeVar, sig.lvl = 0.05, R = 199, k = NULL,
         NoCPGraph()
         message(paste("\nNo change points found at the", sig.lvl,
                 "significance level.\n"))
-        stop(, call. = FALSE)
     }
+    else if (length(CPEstSub) != 0){
 
-    #Find corresponding TimeVar value
-    CPTimes <- as.POSIXct(data[CPEstSub, TimeVar])
+        #Find corresponding TimeVar value
+        CPTimes <- as.POSIXct(data[CPEstSub, TimeVar])
 
-    # Report estimates
-    CPMessage <- lapply(CPTimes, function(x) paste(x, "\n"))
-    message("Change points estimated at:")
-    message(CPMessage)
+        # Report estimates
+        CPMessage <- lapply(CPTimes, function(x) paste(x, "\n"))
+        message("\nChange points estimated at:")
+        message(CPMessage)
 
-    # Melt data frame so that it can be plotted
-    if (!is.null(PlotVars)){
-      DataSub <- data[, c(TimeVar, PlotVars)]
-      DataMolten <- melt(data = DataSub, id.vars = TimeVar,
-                        measure.vars = PlotVars)
-    }
-    else if (is.null(PlotVars)){
-      DataSub <- data[, c(TimeVar, Vars)]
-      DataMolten <- melt(data = DataSub, id.vars = TimeVar, measure.vars = Vars)
-    }
-
-    # Clean pre plotting
-    names(DataMolten) <- c("Time", "GroupVar", "Value")
-    DataMolten$Time <- as.POSIXct(DataMolten$Time)
-    DataMolten <- merge(DataMolten, CPTimes, all = TRUE)
-    names(DataMolten) <- c("Time", "GroupVar", "Value", "Lines")
-    DataMolten$Lines[DataMolten$Time != DataMolten$Lines] <- NA
-
-    # Plot
-    if (length(unique(DataMolten$GroupVar)) == 1){
-      ggplot(data = DataMolten, aes(x = Time, y = Value)) +
-            geom_line() +
-            geom_vline(aes(xintercept = as.numeric(Lines)),
-                        linetype = "longdash", colour = "#DE2D26") +
-            xlab("") + ylab("") +
-            theme_bw()
-    }
-    else if (length(unique(DataMolten$GroupVar)) > 1) {
-        if (Grid == FALSE){
-            ggplot(data = DataMolten, aes(x = Time, y = Value, group = GroupVar,
-                                          colour = GroupVar)) +
-                    geom_line() +
-                    geom_vline(aes(xintercept = as.numeric(Lines)),
-                                linetype = "longdash") +
-                    scale_colour_brewer(palette = palette, name = leg.name) +
-                    xlab("") + ylab("") +
-                    theme_bw()
+        # Melt data frame so that it can be plotted
+        if (!is.null(PlotVars)){
+          DataSub <- data[, c(TimeVar, PlotVars)]
+          DataMolten <- melt(data = DataSub, id.vars = TimeVar,
+                            measure.vars = PlotVars)
         }
-        else if (Grid == TRUE){
-            eachVar <- unique(DataMolten$GroupVar)
-            VarLabels <- data.frame(eachVar, Titles, stringsAsFactors = FALSE)
-            Rows <- 1:nrow(VarLabels)
-            p <- list()
-            for (i in Rows){
-                SubData <- subset(DataMolten, GroupVar == VarLabels[i, 1])
-                Title_i <- VarLabels[i, 2]
-                p[[i]] <-   ggplot(data = SubData,
-                                aes(x = Time, y = Value)) +
-                                geom_line() +
-                                geom_vline(aes(xintercept = as.numeric(Lines)),
-                                           linetype = "longdash",
-                                           colour = "#DE2D26") +
-                                xlab("") + ylab("") + ggtitle(paste(Title_i,
-                                                                    "\n")) +
-                                theme_bw()
+        else if (is.null(PlotVars)){
+          DataSub <- data[, c(TimeVar, Vars)]
+          DataMolten <- melt(data = DataSub, id.vars = TimeVar, measure.vars = Vars)
+        }
+
+        # Clean pre plotting
+        names(DataMolten) <- c("Time", "GroupVar", "Value")
+        DataMolten$Time <- as.POSIXct(DataMolten$Time)
+        DataMolten <- merge(DataMolten, CPTimes, all = TRUE)
+        names(DataMolten) <- c("Time", "GroupVar", "Value", "Lines")
+        DataMolten$Lines[DataMolten$Time != DataMolten$Lines] <- NA
+
+        # Plot
+        if (length(unique(DataMolten$GroupVar)) == 1){
+          ggplot(data = DataMolten, aes(x = Time, y = Value)) +
+                geom_line() +
+                geom_vline(aes(xintercept = as.numeric(Lines)),
+                            linetype = "longdash", colour = "#DE2D26") +
+                xlab("") + ylab("") +
+                theme_bw()
+        }
+        else if (length(unique(DataMolten$GroupVar)) > 1) {
+            if (Grid == FALSE){
+                ggplot(data = DataMolten, aes(x = Time, y = Value, group = GroupVar,
+                                              colour = GroupVar)) +
+                        geom_line() +
+                        geom_vline(aes(xintercept = as.numeric(Lines)),
+                                    linetype = "longdash") +
+                        scale_colour_brewer(palette = palette, name = leg.name) +
+                        xlab("") + ylab("") +
+                        theme_bw()
             }
-            suppressWarnings(do.call(grid.arrange, p))
+            else if (Grid == TRUE){
+                eachVar <- unique(DataMolten$GroupVar)
+                VarLabels <- data.frame(eachVar, Titles, stringsAsFactors = FALSE)
+                Rows <- 1:nrow(VarLabels)
+                p <- list()
+                for (i in Rows){
+                    SubData <- subset(DataMolten, GroupVar == VarLabels[i, 1])
+                    Title_i <- VarLabels[i, 2]
+                    p[[i]] <-   ggplot(data = SubData,
+                                    aes(x = Time, y = Value)) +
+                                    geom_line() +
+                                    geom_vline(aes(xintercept = as.numeric(Lines)),
+                                               linetype = "longdash",
+                                               colour = "#DE2D26") +
+                                    xlab("") + ylab("") + ggtitle(paste(Title_i,
+                                                                        "\n")) +
+                                    theme_bw()
+                }
+                suppressWarnings(do.call(grid.arrange, p))
+            }
         }
-    }
+        }
     }
 }
