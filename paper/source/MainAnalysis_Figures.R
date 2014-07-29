@@ -12,7 +12,7 @@
 setwd('/git_repositories/FedChangePointNote/paper/')
 
 # Load packages
-Pkgs <- c("repmis", "dplyr", "ecp", "gridExtra", "ggplot2", "reshape2")
+Pkgs <- c("repmis", "ecp", "gridExtra", "ggplot2", "reshape2")
 repmis::LoadandCite(Pkgs)
 
 # Load e.divGG function
