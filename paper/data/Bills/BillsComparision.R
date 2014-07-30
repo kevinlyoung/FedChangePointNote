@@ -22,11 +22,13 @@ Bills <- read.csv('BillsData.csv')
 # Clean
 Bills$Bills <- round(Bills$Bills)
 Bills <- arrange(Bills, year)
+Bills <- subset(Bills, year > 1996)
 
 # Plot
-png(file = )
+png(file = 'img/BillsVsHearings.png')
 ggplot(Bills, aes(year, Bills)) +
     geom_line() + 
     geom_vline(xintercept = c(2007, 2010), linetype = 'dashed', colour = 'red') +
     xlab('') + ylab('No. of Bills\n') +
     theme_bw()
+dev.off()

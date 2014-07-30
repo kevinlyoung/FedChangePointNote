@@ -4,12 +4,17 @@ In ''[Creating Scrutiny States]()'' we develop indicators of Congressional scrut
 
 A major alternative approach to measuring Congressional scrutiny of the Federal Reserve is to use counts of proposed legislation that pertain to the Fed (e.g. Kettl 1988 and Binder 2014). Both hearings and bills indicate Congressional scrutiny. However, as Committees and hearings are Congress' primary oversight tool (Oleszek, 2013, 382) and proposed bills need to pass through the committees, data from hearings is a more direct and relevant window onto day-to-day scrutiny. Bill counts also do not capture situations where Congress increases its scrutiny and the Fed makes some response to head off further legislative action.
 
-The following figure compares yearly counts of proposed bills that pertain to the powers of the Federal Reserve gathered from Binder (2014) with the change points we estimate using data from hearings of the House Committee on Financial Services. The two change points in the hearing data were identified to be in April 2007 and June 2010. Before April 2007 was a low scrutiny state. Between April 2007 and May 2010 was a high scrutiny state. The observation period ends with a medium scrutiny state.
+The following figure compares perhaps the most recent data on yearly counts of proposed bills that pertain to the powers of the Federal Reserve gathered from Binder (2014) (see below for details) with the change points we estimate using data from hearings of the House Committee on Financial Services (HCFS). The two change points in the hearing data were identified to be in April 2007 and June 2010. Before April 2007 was a low scrutiny state. Between April 2007 and May 2010 was a high scrutiny state. The observation period ends with a medium scrutiny state.
 
-##
+### Number of Bills Pertaining to the Fed's Powers Compared to HCFS Hearing Scrutiny States (1997-2012)
 
-![]
+![Bills vs. Hearings](img/BillsVsHearings.png)
 
+Dashed red lines indicate years with a change point in HCFS hearing scrutiny.
+
+There is certainly overlap between the two scrutiny indicators. The high scrutiny state contains the year (2009) with by far the most bills (62). The medium scrutiny state also includes a year with relatively many bills being proposed--48 bills were proposed in 2011. 
+
+## Gathering Data on Bills
 
 ## References
 
