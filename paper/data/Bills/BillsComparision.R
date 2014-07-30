@@ -24,6 +24,7 @@ Bills$Bills <- round(Bills$Bills)
 Bills <- arrange(Bills, year)
 
 # Plot
+png(file = )
 ggplot(Bills, aes(year, Bills)) +
     geom_line() + 
     geom_vline(xintercept = c(2007, 2010), linetype = 'dashed', colour = 'red') +
