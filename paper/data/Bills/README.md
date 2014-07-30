@@ -8,7 +8,7 @@ The following figure compares perhaps the most recent data on yearly counts of p
 
 ### Number of Bills Pertaining to the Fed's Powers Compared to HCFS Hearing Scrutiny States (1997-2012)
 
-![Bills vs. Hearings](img/BillsVsHearings.png)
+[<img src="img/BillsVsHearings.png" align="middle"/>]()
 
 Dashed red lines indicate years with a change point in HCFS hearing scrutiny.
 
