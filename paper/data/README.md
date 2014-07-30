@@ -10,7 +10,7 @@ Two CSV files contain the main data:
 
 - *[SenateFullHearings.csv](FedChangePointNote/paper/data/SenateFullHearings.csv)*: data pertaining to the US Senate
 
-Please see [the working paper](FedChangePointNote/paper/ChangPointCongFed.pdf) pages 2-4 for a discussion of the testimony data, including source. See pages 10-11 for a discussion of the economic data and sources.
+Please see [the working paper](FedChangePointNote/paper/ChangPointCongFed.pdf) pages 2-4 and page 6 for a discussion of the testimony data, including sources. See pages 10-11 for a discussion of the economic data and sources.
 
 ## Bills Note
 
