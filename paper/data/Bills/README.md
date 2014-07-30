@@ -1,6 +1,6 @@
 # Comparing Scrutiny Indicators: Bills vs. Hearings
 
-In ''[Creating Scrutiny States]()'' we develop indicators of Congressional scrutiny of the US Federal Reserve. The indicators are created using a change point analysis of indicators of Congresspersons' behavior in relevant committee hearings.
+In ''[Creating Scrutiny States](FedChangePointNote/README.md)'' we develop indicators of Congressional scrutiny of the US Federal Reserve. The indicators are created using a change point analysis of indicators of Congresspersons' behavior in relevant committee hearings.
 
 A major alternative approach to measuring Congressional scrutiny of the Federal Reserve is to use counts of proposed legislation that pertain to the Fed (e.g. Kettl 1988 and Binder 2014). Both hearings and bills indicate Congressional scrutiny. However, as Committees and hearings are Congress' primary oversight tool (Oleszek, 2013, 382) and proposed bills need to pass through the committees, data from hearings is a more direct and relevant window onto day-to-day scrutiny. Bill counts also do not capture situations where Congress increases its scrutiny and the Fed makes some response to head off further legislative action.
 
