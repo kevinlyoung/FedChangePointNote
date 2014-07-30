@@ -21,10 +21,11 @@ through 2012. Though independent, the Federal Reserve (the Fed) is accountable t
 
 The paper and analyses can be completely reproduced using the files in this repository.
 
-Us the *paper/source/MainAnalysis_Figures.R* source file to reproduce all of the change point analyses and recreate the figures in the paper.  
-All of the data used in the paper can be found in *paper/data*.
+Us the *[paper/source/MainAnalysis_Figures.R](paper/source/MainAnalysis_Figures.R)* source file to reproduce all of the change point analyses and recreate the figures in the paper.  
 
-A comparison of the Congressional hearing-based scrutiny indicators and previously used bill count measures can be found in *paper/data/Bills/README.md*.
+All of the data used in the paper can be found in *[paper/data](paper/data)*.
+
+A comparison of the Congressional hearing-based scrutiny indicators and previously used bill count measures can be found in *[paper/data/Bills/README.md](paper/data/Bills/README.md)*.
 
 ---
 
