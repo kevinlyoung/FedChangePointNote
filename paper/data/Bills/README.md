@@ -12,9 +12,13 @@ The following figure compares perhaps the most recent data on yearly counts of p
 
 Dashed red lines indicate years with a change point in HCFS hearing scrutiny.
 
-There is certainly overlap between the two scrutiny indicators. The high scrutiny state contains the year (2009) with by far the most bills (62). The medium scrutiny state also includes a year with relatively many bills being proposed--48 bills were proposed in 2011. 
+There is certainly overlap between the two scrutiny indicators. The high scrutiny state contains the year (2009) with by far the most bills (62). The medium scrutiny state also includes a year with relatively many bills being proposed--48 bills were proposed in 2011.
+
+It is important to note that bill counts appears to provides a lagging indicator of scrutiny. The year with the highest bill counts was a year and a half after congressperson's behavior changed in committee hearings.
 
 ## Gathering Data on Bills
+
+Binder's (2014) data was made available in a plot. To gather this data we used the plot scrapper [WebPlotDigitizer ](http://dx.doi.org/10.5281/zenodo.10532). This method may introduce small rounding errors into the data. However, the overall trends in the data are accurately captured by the figure above.
 
 ## References
 
